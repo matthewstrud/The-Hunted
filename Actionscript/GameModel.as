@@ -1,5 +1,6 @@
 ﻿package  {
 	import flash.geom.Utils3D;
+	import flash.media.SoundChannel;
 	
 	public class GameModel 
 	{
@@ -10,6 +11,10 @@
 		private var thisPlayer : Player;
 		private var playerName : String;
 		private var playerSet : Boolean = false; //has the current player been set?
+		var destroyed = new Laser3(); //New instance of the destroyed sound
+		private var laser = new Laser(); //New instance of the destroyed sound
+		var channel:SoundChannel = new SoundChannel(); //New soundchannel to hold the track
+		
 
 		public function GameModel(par : multiplayerManager) 
 		{
@@ -163,6 +168,8 @@
 					tmpMissile.setImmune();
 				}
 				
+				laserSound();
+				
 				//TODO check if the missile is from the player, if so give ignore value
 			}
 		}
@@ -227,8 +234,19 @@
 						p.removeChild(players[i]);
 					}
 				}
+				destroysound();
 			}
 
+		}
+		/*Function which will plays destroyed sound*/
+		public function destroysound():void 
+		{
+			channel = destroyed.play(0,1);
+		}
+		
+		public function laserSound():void 
+		{
+			channel = laser.play(0,1);
 		}
 		
 	}

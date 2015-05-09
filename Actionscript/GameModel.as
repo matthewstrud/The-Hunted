@@ -12,7 +12,7 @@
 		private var playerName : String;
 		private var playerSet : Boolean = false; //has the current player been set?
 		var destroyed = new Laser3(); //New instance of the destroyed sound
-		private var laser = new Laser(); //New instance of the destroyed sound
+		private var laser = new Laser(); //New instance of the laser sound
 		var channel:SoundChannel = new SoundChannel(); //New soundchannel to hold the track
 		
 

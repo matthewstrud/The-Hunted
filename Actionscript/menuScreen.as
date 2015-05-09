@@ -13,7 +13,8 @@
 		{
 			addEventListener(Event.ADDED_TO_STAGE, addedHandler);
 			this.About.addEventListener(MouseEvent.CLICK,aboutscreen);
-			Start.addEventListener(MouseEvent.CLICK, start);
+			this.Start.addEventListener(MouseEvent.CLICK,selectscreen);
+			//Start.addEventListener(MouseEvent.CLICK, start);
 		}
 		
 		
@@ -27,16 +28,21 @@
 			p = this.parent;
 		}
 		
-		public function start(e:Event)
+		/*public function start(e:Event)
 		{
 			p.mm();
-		}
+		}*/
 		/*Function checking if highscore button has been pressed based
 	if so show highscore screen */
 	
 	private function aboutscreen(event:MouseEvent):void {
 		var about:aboutScreen = new aboutScreen(); //New instance of highscore screen
 			this.parent.addChild(about); //Adds the highscore screen
+			}
+			
+			private function selectscreen(event:MouseEvent):void {
+		var select:selectScreen = new selectScreen(); //New instance of highscore screen
+			this.parent.addChild(select); //Adds the highscore screen
 			}
 
 	}

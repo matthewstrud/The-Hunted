@@ -100,7 +100,7 @@
 		
 		private function onPublicMessage(e:SFSEvent) : void
 		{
-			trace(e.params.sender + ": " + e.params.message);
+			//trace("ConnectionManager.onPublicMessage: " + e.params.sender + ": " + e.params.message);
 			p.message(e.params.message);
 		}
 		

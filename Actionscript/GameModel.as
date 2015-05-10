@@ -155,7 +155,7 @@
 				var user:String = split[4];
 				var lasNum:int = parseInt(split[5]);
 				
-				trace("x is: " + tmpX + "y is: " + tmpY + "rotation is: " + tmpR);
+				//trace("x is: " + tmpX + "y is: " + tmpY + "rotation is: " + tmpR);
 				
 				var tmpMissile : Missile = new Missile(tmpX, tmpY, tmpR, thisPlayer);
 				tmpMissile.gotoAndStop(lasNum);
@@ -223,11 +223,12 @@
 			
 			//removeMissileIndex(split[2]);
 			//var missNo = parseInt(split[2]);
-			removeMissileIndex(parseInt(split[2]));
+			removeMissileIndex(parseInt(split[3]));
 			
 			if(us == playerName)
 			{
-				thisPlayer.setSpecate(true);
+				if(this.thisPlayer.decreaseHealth(parseInt(split[5])))
+					thisPlayer.setSpecate(true);
 			}
 			else
 			{
@@ -235,7 +236,8 @@
 				{
 					if(players[i].getPlayerId() == us)
 					{
-						p.removeChild(players[i]);
+						if(this.players[i].decreaseHealth(parseInt(split[5])))
+							p.removeChild(players[i]);
 					}
 				}
 				destroysound();

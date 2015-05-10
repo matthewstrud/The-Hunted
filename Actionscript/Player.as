@@ -18,6 +18,7 @@
 		private var p = null;
 		
 		private var specate:Boolean;
+		private var health:int;
 
 		public function Player(name : String)
 		{
@@ -27,6 +28,7 @@
 			this.x = 0;
 			this.y = 0;
 			specate = false;
+			health = 3;
 		}
 		/*
 		public function Player(name : String, xPos: int, yPos : int, rot : int)
@@ -242,6 +244,13 @@
 			p = this.parent;
 			xBounds = p.getXBounds();
 			yBounds = p.getYBounds();
+		}
+		
+		public function decreaseHealth(value:int) : Boolean
+		{
+			this.health -= value;
+			if (this.health > 0) return false;
+			return true;
 		}
 	
 	}

@@ -111,7 +111,7 @@
 			
 			//move based upon rotation
 			
-			trace("BEUG - Movement request recieve: " + move);
+			//trace("BEUG - Movement request recieve: " + move);
 			if(move == 1) //left
 			{
 				//tempX = tempX - speed;
@@ -205,7 +205,8 @@
 		
 		public function destroy(miss : Missile)
 		{
-			cm.broadcast("!des " + userName + " " + m.getMissileIndex); 
+			cm.broadcast("!des " + userName + " " + m.getMissileIndex + " " + 1); 
+			// the last value "1" is temperory and denotes damage.
 		}
 		
 		public function getShipNum() : String

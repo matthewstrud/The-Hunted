@@ -18,14 +18,13 @@
 		private var changed : Boolean = true;
 		private var shipNum : int = 0;
 		private var lasNum : int = 0;
+		public static var frame :String = "darkness";
 		
 		private var speed : int = 1;
 		
 		public function multiplayerManager(sn:int , ls:int) 
 		{
-
 			trace("sent variable is: " + sn);
-			
 			shipNum = sn;
 			lasNum = ls;
 			
@@ -51,6 +50,7 @@
 		
 		override public function update()
 		{
+			gotoAndStop(frame);
 			gc.update();
 			m.update();
 			
@@ -123,7 +123,7 @@
 			{
 				//tempY = tempY + speed;
 				//temp.y += speed;
-				temp.moveDir( -1);
+				temp.moveDir(-1);
 			}
 			else if(move == 3) //right
 			{
@@ -218,6 +218,14 @@
 			m.removeMissile(miss);
 		}
 		
+		public static function battlearena(type:Boolean):void {
+			if (type == true) {
+			frame = "lightness";
+			}
+			else if (type == false) {
+			frame = "darkness";
+		}
 	}
 	
+}
 }

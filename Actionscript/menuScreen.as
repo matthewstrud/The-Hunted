@@ -14,6 +14,7 @@
 			addEventListener(Event.ADDED_TO_STAGE, addedHandler);
 			this.About.addEventListener(MouseEvent.CLICK,aboutscreen);
 			this.Start.addEventListener(MouseEvent.CLICK,selectscreen);
+			this.Settings.addEventListener(MouseEvent.CLICK,settingsscreen);
 			//Start.addEventListener(MouseEvent.CLICK, start);
 		}
 		
@@ -38,6 +39,11 @@
 	private function aboutscreen(event:MouseEvent):void {
 		var about:aboutScreen = new aboutScreen(); //New instance of highscore screen
 			this.parent.addChild(about); //Adds the highscore screen
+			}
+			
+			private function settingsscreen(event:MouseEvent):void {
+		var settings:settingsScreen = new settingsScreen(); //New instance of highscore screen
+			this.parent.addChild(settings); //Adds the highscore screen
 			}
 			
 			private function selectscreen(event:MouseEvent):void {

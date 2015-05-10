@@ -15,7 +15,7 @@
 		private var settings:settingsScreen;
 		private var multiplayer:multiplayerManager;
 		private var singlePlayer:gameInstance;
-		private var shipNum : int = 2;
+		public static var shipNum : int = 0;
 		private var lasNum : int = 1;
 		var backingtrack = new Theme(); //New instance of the hit ground sound
 		var channel:SoundChannel = new SoundChannel(); //New soundchannel to hold the track
@@ -65,7 +65,7 @@
 		/*Function which will plays backing track*/
 		public function playtheme():void {
 				channel = backingtrack.play(0,9999);
-				channel.soundTransform = new SoundTransform(0.4); // Sets the volume to 40%
+				channel.soundTransform = new SoundTransform(0.75); // Sets the volume to 40%
 		 }
 	}
 	

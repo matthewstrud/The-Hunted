@@ -123,7 +123,7 @@
 			{
 				//tempY = tempY + speed;
 				//temp.y += speed;
-				temp.moveDir(-1);
+				temp.moveDir( -1);
 			}
 			else if(move == 3) //right
 			{
@@ -147,16 +147,19 @@
 		//message passed on from the controller to fire weapon
 		public function fire()
 		{
-			var temp : Player = m.getPlayer();
-			//get the players rotation (players rotation is equal to the missiles rotation)
-			var rot = temp.rotation;
-			//get the position (position is equal to the players original position)
-			var xPos = temp.x;
-			var yPos = temp.y;
-			
-			trace(rot);
-			
-			cm.broadcast("!f " + xPos + " " + yPos + " " + rot + " " + userName + " " + lasNum);
+			if (!m.getPlayer().getSpecate()) 
+			{				
+				var temp : Player = m.getPlayer();
+				//get the players rotation (players rotation is equal to the missiles rotation)
+				var rot = temp.rotation;
+				//get the position (position is equal to the players original position)
+				var xPos = temp.x;
+				var yPos = temp.y;
+				
+				trace(rot);
+				
+				cm.broadcast("!f " + xPos + " " + yPos + " " + rot + " " + userName + " " + lasNum);
+			}
 		}
 		
 		//send position updates to the other players
@@ -202,7 +205,7 @@
 		
 		public function destroy(miss : Missile)
 		{
-			cm.broadcast("!des " + userName); 
+			cm.broadcast("!des " + userName + " " + m.getMissileIndex); 
 		}
 		
 		public function getShipNum() : String

@@ -8,6 +8,7 @@
 		private var immune = false;
 		private var player : Player = null;
 		private var p = null;
+		
 
 		public function Missile(tmpX : int, tmpY : int, tmpR : int, plyr : Player) 
 		{
@@ -38,7 +39,7 @@
 		//check for collisions ignoring this player
 		private function checkCollisions()
 		{
-			if(immune == false)
+			if(immune == false && !player.getSpecate())
 			{
 				if(this.hitTestObject(player))
 				{

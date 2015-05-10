@@ -221,9 +221,13 @@
 			
 			var us = split[1];
 			
+			//removeMissileIndex(split[2]);
+			//var missNo = parseInt(split[2]);
+			removeMissileIndex(parseInt(split[2]));
+			
 			if(us == playerName)
 			{
-				p.removeChild(thisPlayer);
+				thisPlayer.setSpecate(true);
 			}
 			else
 			{
@@ -247,6 +251,18 @@
 		public function laserSound():void 
 		{
 			channel = laser.play(0,1);
+		}
+		
+		// This is flawed.
+		public function getMissileIndex(miss:Missile) : int
+		{
+			return projectiles.indexOf(miss);
+		}
+		
+		public function removeMissileIndex(integer : int) : void
+		{
+			p.removeChild(projectiles[integer]);
+			projectiles.splice(integer, 1);
 		}
 		
 	}

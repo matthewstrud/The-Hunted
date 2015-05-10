@@ -16,6 +16,8 @@
 		private var slowDownSpeed : Number = 0.01;
 		private var maxSpeed : int = 10;
 		private var p = null;
+		
+		private var specate:Boolean;
 
 		public function Player(name : String)
 		{
@@ -24,6 +26,7 @@
 			id = name;
 			this.x = 0;
 			this.y = 0;
+			specate = false;
 		}
 		/*
 		public function Player(name : String, xPos: int, yPos : int, rot : int)
@@ -224,7 +227,16 @@
 			}
 		}
 		
+		public function getSpecate() : Boolean
+		{
+			return this.specate;
+		}
 		
+		public function setSpecate(val:Boolean) : void
+		{
+			this.specate = val;
+		}
+
 		private function addedHandler(e:Event)
 		{
 			p = this.parent;

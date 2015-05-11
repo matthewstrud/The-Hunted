@@ -181,24 +181,28 @@
 			{
 				x = 0;
 				p.x = 0 + 540;
+				p.thehealth.x = 0 - 540;
 			}
 			//4320
 			else if(x > p.getXBounds())
 			{
 				x = p.getXBounds();
-				p.x = -p.getXBounds()+540;
+				p.x = -p.getXBounds() + 540;
+				p.thehealth.x = p.getXBounds() - 540;
 			}
 			
 			if(y < 0)
 			{
 				y = 0;
 				p.y = 0 + 360;
+				p.thehealth.y = 0-360;
 			}
 			//2880 - 360
 			else if(y > p.getYBounds())
 			{
 				y = p.getYBounds();
 				p.y = -p.getYBounds() + 360;
+				p.thehealth.y = p.getYBounds() - 360;
 			}
 		}
 		

@@ -163,16 +163,12 @@
 				
 				//trace("x is: " + tmpX + "y is: " + tmpY + "rotation is: " + tmpR);
 				
-				var tmpMissile : Missile = new Missile(tmpX, tmpY, tmpR, thisPlayer);
+				var tmpMissile : Missile = new Missile(tmpX, tmpY, tmpR, thisPlayer,user);
 				tmpMissile.gotoAndStop(lasNum);
 				
 				projectiles.push(tmpMissile);
 				p.addChild(tmpMissile);
 				
-				if(user == playerName)
-				{
-					tmpMissile.setImmune();
-				}
 				
 				laserSound();
 				
@@ -227,14 +223,16 @@
 			
 			var us = split[1];
 			
-			//removeMissileIndex(split[2]);
-			//var missNo = parseInt(split[2]);
+			
 			removeMissileIndex(parseInt(split[3]));
 			
 			if(us == playerName)
 			{
-				if(this.thisPlayer.changeHealth(parseInt(split[5])))
+				if (this.thisPlayer.changeHealth(parseInt(split[5])))
+				{
 					thisPlayer.setSpecate(true);
+					p.sendNotificatoon(" " +thisPlayer.getPlayerId() + " was destoryed by " + split[6]);
+				}
 				Health.changehealth(thisPlayer.getHealth());
 			}
 			else
@@ -243,8 +241,10 @@
 				{
 					if(players[i].getPlayerId() == us)
 					{
-						if(this.players[i].changeHealth(parseInt(split[5])))
+						if (this.players[i].changeHealth(parseInt(split[5]))) 
+						{						
 							p.removeChild(players[i]);
+						}
 					}
 				}
 				destroysound();

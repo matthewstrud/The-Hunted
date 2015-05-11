@@ -240,7 +240,7 @@
 		
 		public function destroy(miss : Missile)
 		{
-			cm.broadcast("!des " + userName + " " + m.getMissileIndex + " " + "-1"); 
+			cm.broadcast("!des " + userName + " " + m.getMissileIndex + " " + "-1" + " " + miss.getPlayerName()); 
 			// the last value "-1" is temperory and denotes damage.
 		}
 		
@@ -326,6 +326,11 @@
 		public function sendMessage():void
 		{
 			cm.broadcast("!m " + m.getName() + " " + this.chatbox.text);
+		}
+		
+		public function sendNotificatoon(mes:String):void
+		{
+			cm.broadcast("!m " + mes);
 		}
 		
 		public static function battlearena(type:Boolean):void {

@@ -9,8 +9,9 @@
 		private var player : Player = null;
 		private var p = null;
 		private var hasHit:Boolean = false;
+		private var user:String;
 
-		public function Missile(tmpX : int, tmpY : int, tmpR : int, plyr : Player) 
+		public function Missile(tmpX : int, tmpY : int, tmpR : int, plyr : Player, tuser:String) 
 		{
 			// constructor code
 			addEventListener(Event.ADDED_TO_STAGE, addedHandler);
@@ -18,6 +19,13 @@
 			y = tmpY;
 			rotation = tmpR;
 			player = plyr;
+			user = tuser;
+			
+			if(user == player.getPlayerId())
+			{
+				setImmune();
+			}
+			
 		}
 		
 		override public function update()
@@ -55,6 +63,11 @@
 			{
 				p.removeMissile(this);
 			}
+		}
+		
+		public function getPlayerName():String
+		{
+			return user;
 		}
 		
 		public function addedHandler(e:Event)

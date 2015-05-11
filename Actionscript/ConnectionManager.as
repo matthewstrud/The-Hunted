@@ -96,6 +96,7 @@
 		private function onUserExitRoom(e:SFSEvent) : void
 		{
 			trace("User left room: " + e.params.user.name);
+			broadcast("!removePlayer " + e.params.user.name);
 		}
 		
 		private function onPublicMessage(e:SFSEvent) : void

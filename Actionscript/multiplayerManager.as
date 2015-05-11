@@ -3,9 +3,12 @@
 	import flash.display.MovieClip;
 	import flash.events.KeyboardEvent;
 	import flash.events.TimerEvent;
+	import flash.text.Font;
+	import flash.text.TextField;
+	import flash.text.TextFormat;
 	import flash.utils.Timer;
 	import flash.events.Event;
-	
+	import flash.text.TextFieldType;
 	
 	public class multiplayerManager extends Screen 
 	{
@@ -19,6 +22,10 @@
 		private var shipNum : int = 0;
 		private var lasNum : int = 0;
 		public static var frame :String = "darkness";
+		
+		//private var healthField:TextField;
+		private var chatarea:TextField;
+		private var chatbox:TextField;
 		
 		private var speed : int = 1;
 		
@@ -36,11 +43,20 @@
 			this based upon the users choice in the log in screen
 			*/
 			userName = Math.ceil((Math.random() * 100)).toString();
+			
 			m = new GameModel(this);
 			cm = new ConnectionManager(this);
+			
 			cm.connect(userName, roomName);
 			m.setName(userName);
 			gc  = new gameController(this);
+			addChat();
+			//this.healthField = new TextField();
+			//var tmp:Player = m.getPlayer();
+			//this.healthField.text = "hello";
+			//this.healthField.text = toString(tmp.getHealth());
+			//this.healthField.textColor = 0xFFFFFF;
+			//addChild(this.healthField);
 			//cm.broadcast("!addPlayer 100 100 " + m.getName() + " " + shipNum);
 			
 			var updateTimer:Timer = new Timer(10);
@@ -55,11 +71,25 @@
 			gc.update();
 			m.update();
 			
+			moveTextField();
+			
 			var temp : Player = m.getPlayer();
 			var tempX = temp.x;
 			var tempY = temp.y;
 			var rot = temp.rotation;
 			
+		}
+		
+		private function moveTextField()
+		{
+			//this.healthField.x = -x+10;
+			//this.healthField.y = -y + 10;
+			
+			this.chatbox.x = -x;
+			this.chatbox.y = -y + ((getYBounds()/4) -30);
+			
+			this.chatarea.x = -x;
+			this.chatarea.y = -y + ((getYBounds()/4) -100);
 		}
 		
 		public function message(message : String) : void
@@ -96,6 +126,10 @@
 			if(message.indexOf("!des") >=0)
 			{
 				m.destroy(message);
+			}
+			else if (message.indexOf("!m") >= 0)
+			{
+				appendToChatArea(message);
 			}
 		}
 		
@@ -206,8 +240,8 @@
 		
 		public function destroy(miss : Missile)
 		{
-			cm.broadcast("!des " + userName + " " + m.getMissileIndex + " " + 1); 
-			// the last value "1" is temperory and denotes damage.
+			cm.broadcast("!des " + userName + " " + m.getMissileIndex + " " + "-1"); 
+			// the last value "-1" is temperory and denotes damage.
 		}
 		
 		public function getShipNum() : String
@@ -218,6 +252,80 @@
 		public function removeMissile( miss : Missile)
 		{
 			m.removeMissile(miss);
+		}
+		
+		private function addChat():void
+		{
+			chatarea = new TextField();
+			chatarea.name = "chatarea"; //get child by name
+			chatarea.width = this.width;
+			//chatarea.height = 10;
+			chatarea.height = 60;
+			chatarea.wordWrap = true;
+			chatarea.selectable = false;
+			
+			var chatFormat:TextFormat = new TextFormat();
+			chatFormat.size = 12;
+			//var chatFont:Font = new Font();
+			//chatFormat.font = chatFont;
+			chatFormat.color = 0xffff00;
+			
+			chatarea.defaultTextFormat = chatFormat;
+			
+			chatbox = new TextField();
+			chatbox.name = "chatbox";
+			this.chatbox.width = this.width;
+			//this.chatbox.height = 10
+			this.chatbox.wordWrap = false;
+			this.chatbox.selectable = true;
+			this.chatbox.type = TextFieldType.DYNAMIC;
+			this.chatbox.alwaysShowSelection = true;
+			
+			this.chatbox.defaultTextFormat = chatFormat;
+			
+			this.chatarea.text = "";
+			this.chatbox.text = "";
+			
+			addChild(chatarea);
+			addChild(chatbox);
+			//stage.focus = this.chatbox;
+		}
+		
+		public function setChatType(type:int):void
+		{
+			if (type == 1) 
+			{
+				this.chatbox.type = TextFieldType.INPUT;
+				this.focusRect = this.chatbox;
+			}
+			else 
+				this.chatbox.type = TextFieldType.DYNAMIC;
+		}
+		
+		public function appendToChatArea(m:String):void
+		{
+			var split:Array = m.split(" ");
+			var toAppend:String = "";
+			for (var k = 0; k < split.length; k++)
+				trace(split[k]);
+			toAppend += split[1] + ": ";
+			for (var i:int = 2; i < split.length; i++)
+			{
+				toAppend += split[i] + " ";
+			}
+			toAppend += "\n";
+			this.chatarea.appendText(toAppend);
+			this.chatarea.scrollV = this.chatarea.maxScrollV;
+		}
+		
+		public function setChatBox(mes:String):void
+		{
+			this.chatbox.text = mes;
+		}
+		
+		public function sendMessage():void
+		{
+			cm.broadcast("!m " + m.getName() + " " + this.chatbox.text);
 		}
 		
 		public static function battlearena(type:Boolean):void {

@@ -8,7 +8,7 @@
 		private var immune = false;
 		private var player : Player = null;
 		private var p = null;
-		
+		private var hasHit:Boolean = false;
 
 		public function Missile(tmpX : int, tmpY : int, tmpR : int, plyr : Player) 
 		{
@@ -41,8 +41,9 @@
 		{
 			if(immune == false && !player.getSpecate())
 			{
-				if(this.hitTestObject(player))
+				if(this.hitTestObject(player) && !hasHit)
 				{
+					hasHit = true;
 					p.destroy(this);
 				}
 			}

@@ -81,11 +81,10 @@
 							found = true;
 							trace("added this player");
 						}
+						p.appendToChatArea("User Joined " + split[3]);
 					}
-						
 				}
 			}
-			
 			return found;
 		}
 		
@@ -107,8 +106,15 @@
 					{
 						//If the player currently selected is the same as the player
 						//being removed. Remove that player.
-						if(players[i].getPlayerId() == split[3])
+						if(players[i].getPlayerId() == split[1])
 						{
+							p.appendToChatArea("User Left " + split[1]);
+							var tmp:Player = players[i];
+							//projectiles.indexOf(miss)
+							//trace("Player id's " + ", " + tmp.getPlayerId() + ", " + split[1]);
+							//trace(players.indexOf(tmp));
+							//players.splice(players.indexOf(tmp), 1);
+							p.removeChild(players[i]);
 							players.splice(i, 1);
 							removed = true;
 						}
@@ -227,10 +233,9 @@
 			
 			if(us == playerName)
 			{
-				if(this.thisPlayer.decreaseHealth(parseInt(split[5]))) {
+				if(this.thisPlayer.changeHealth(parseInt(split[5])))
 					thisPlayer.setSpecate(true);
-				}
-								Health.changehealth(thisPlayer.getHealth());
+				Health.changehealth(thisPlayer.getHealth());
 			}
 			else
 			{
@@ -238,7 +243,7 @@
 				{
 					if(players[i].getPlayerId() == us)
 					{
-						if(this.players[i].decreaseHealth(parseInt(split[5])))
+						if(this.players[i].changeHealth(parseInt(split[5])))
 							p.removeChild(players[i]);
 					}
 				}

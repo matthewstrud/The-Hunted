@@ -252,9 +252,14 @@
 			yBounds = p.getYBounds();
 		}
 		
-		public function decreaseHealth(value:int) : Boolean
+		/**
+		 * 
+		 * @param	value to change
+		 * @return TRUE if player health is below 0. else FASLE
+		 */
+		public function changeHealth(value:int) : Boolean
 		{
-			this.health -= value;
+			this.health += value;
 			if (this.health > 0) return false;
 			return true;
 		}

@@ -51,6 +51,7 @@
 		override public function update()
 		{
 			gotoAndStop(frame);
+			thehealth.update();
 			gc.update();
 			m.update();
 			

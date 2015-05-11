@@ -24,6 +24,7 @@
 			this.parent.removeChild(this); //Removes the screen to save memory
 			this.playselect();
 			Main.shipNum = 3;
+			Main.lasNum = 1;
 			p.mm();
 		}
 		public function start2(e:Event)
@@ -31,6 +32,7 @@
 			this.parent.removeChild(this); //Removes the screen to save memory
 			this.playselect();
 			Main.shipNum = 2;
+			Main.lasNum = 2;
 			p.mm();
 		}
 		public function start3(e:Event)
@@ -38,6 +40,7 @@
 			this.parent.removeChild(this); //Removes the screen to save memory
 			this.playselect();
 			Main.shipNum = 1;
+			Main.lasNum = 3;
 			p.mm();
 		}
 		public function start4(e:Event)
@@ -45,6 +48,7 @@
 			this.parent.removeChild(this); //Removes the screen to save memory
 			this.playselect();
 			Main.shipNum = 4;
+			Main.lasNum = 4;
 			p.mm();
 		}
 		public function addedHandler(e:Event)

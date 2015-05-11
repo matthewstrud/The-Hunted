@@ -227,8 +227,10 @@
 			
 			if(us == playerName)
 			{
-				if(this.thisPlayer.decreaseHealth(parseInt(split[5])))
+				if(this.thisPlayer.decreaseHealth(parseInt(split[5]))) {
 					thisPlayer.setSpecate(true);
+				}
+								Health.changehealth(thisPlayer.getHealth());
 			}
 			else
 			{

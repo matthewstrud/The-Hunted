@@ -16,7 +16,7 @@
 		private var multiplayer:multiplayerManager;
 		private var singlePlayer:gameInstance;
 		public static var shipNum : int = 0;
-		private var lasNum : int = 1;
+		public static var lasNum : int = 0;
 		var backingtrack = new Theme(); //New instance of the hit ground sound
 		var channel:SoundChannel = new SoundChannel(); //New soundchannel to hold the track
 		

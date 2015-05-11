@@ -85,6 +85,10 @@
 		{
 			return status;
 		}
+		public function getHealth() : int
+		{
+			return health;
+		}
 		
 		//only called for the current player
 		public function update() : void
@@ -132,9 +136,11 @@
 			p.x -= xSpeed;
 			p.y -= ySpeed;
 			
-			//then move the player
+			//then move the player and the health bar
 			x += xSpeed;
 			y += ySpeed;
+			p.thehealth.x += xSpeed;
+			p.thehealth.y += ySpeed;
 			
 			//rotation ease off
 			

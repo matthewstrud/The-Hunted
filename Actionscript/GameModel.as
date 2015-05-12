@@ -99,25 +99,22 @@
 			var split:Array = mes.split(" ");
 			if(split.length > 0)
 			{
-				if(split[0] == "!removePlayer")
+				//Loop through the player the model knows about
+				for(var i:int = 0; i < players.length; i++)
 				{
-					//Loop through the player the model knows about
-					for(var i:int = 0; i < players.length; i++)
+					//If the player currently selected is the same as the player
+					//being removed. Remove that player.
+					if(players[i].getPlayerId() == split[1])
 					{
-						//If the player currently selected is the same as the player
-						//being removed. Remove that player.
-						if(players[i].getPlayerId() == split[1])
-						{
-							p.appendToChatArea("User Left " + split[1]);
-							var tmp:Player = players[i];
-							//projectiles.indexOf(miss)
-							//trace("Player id's " + ", " + tmp.getPlayerId() + ", " + split[1]);
-							//trace(players.indexOf(tmp));
-							//players.splice(players.indexOf(tmp), 1);
-							p.removeChild(players[i]);
-							players.splice(i, 1);
-							removed = true;
-						}
+						p.appendToChatArea("User Left " + split[1]);
+						var tmp:Player = players[i];
+						//projectiles.indexOf(miss)
+						//trace("Player id's " + ", " + tmp.getPlayerId() + ", " + split[1]);
+						//trace(players.indexOf(tmp));
+						//players.splice(players.indexOf(tmp), 1);
+						p.removeChild(players[i]);
+						players.splice(i, 1);
+						removed = true;
 					}
 				}
 			}
@@ -232,6 +229,7 @@
 				{
 					thisPlayer.setSpecate(true);
 					p.sendNotificatoon(" " +thisPlayer.getPlayerId() + " was destoryed by " + split[6]);
+					p.broadcast("!di " + this.thisPlayer.getPlayerId());
 				}
 				Health.changehealth(thisPlayer.getHealth());
 			}

@@ -9,6 +9,8 @@
 	import flash.utils.Timer;
 	import flash.events.Event;
 	import flash.text.TextFieldType;
+	import flash.display.FocusDirection;
+	
 	
 	public class multiplayerManager extends Screen 
 	{
@@ -28,7 +30,7 @@
 		private var chatbox:TextField;
 		
 		private var speed : int = 1;
-		
+		//private static 
 		public function multiplayerManager(sn:int , ls:int) 
 		{
 			trace("sent variable is: " + sn);
@@ -130,6 +132,10 @@
 			else if (message.indexOf("!m") >= 0)
 			{
 				appendToChatArea(message);
+			}
+			if (message.indexOf("!di") >= 0)
+			{
+				m.removePlayer(message);
 			}
 		}
 		
@@ -288,7 +294,7 @@
 			
 			addChild(chatarea);
 			addChild(chatbox);
-			//stage.focus = this.chatbox;
+			//this.stage.focus = this.chatbox;//stage.focus = this.chatbox;
 		}
 		
 		public function setChatType(type:int):void
@@ -326,6 +332,11 @@
 		public function sendMessage():void
 		{
 			cm.broadcast("!m " + m.getName() + " " + this.chatbox.text);
+		}
+		
+		public function broadcast(mes:String):void
+		{
+			cm.broadcast(mes);
 		}
 		
 		public function sendNotificatoon(mes:String):void

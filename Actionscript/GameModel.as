@@ -14,6 +14,7 @@
 		var destroyed = new Laser3(); //New instance of the destroyed sound
 		private var laser = new Laser(); //New instance of the laser sound
 		var channel:SoundChannel = new SoundChannel(); //New soundchannel to hold the track
+		public var gameover:endScreen;
 		
 
 		public function GameModel(par : multiplayerManager) 
@@ -230,6 +231,9 @@
 					thisPlayer.setSpecate(true);
 					p.sendNotificatoon(" " +thisPlayer.getPlayerId() + " was destoryed by " + split[6]);
 					p.broadcast("!di " + this.thisPlayer.getPlayerId());
+					gameover = new endScreen();
+					gameover.visible = true;
+					p.addChild(gameover);
 				}
 				Health.changehealth(thisPlayer.getHealth());
 			}

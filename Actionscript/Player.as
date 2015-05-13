@@ -246,6 +246,7 @@
 		
 		public function setSpecate(val:Boolean) : void
 		{
+			trace("Player.setSpecate new value: " + val);
 			this.specate = val;
 		}
 

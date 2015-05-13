@@ -75,10 +75,12 @@
 			
 			moveTextField();
 			
-			var temp : Player = m.getPlayer();
-			var tempX = temp.x;
-			var tempY = temp.y;
-			var rot = temp.rotation;
+			//trace("Current spectate: " +  m.getPlayer().getSpecate());
+			
+			//var temp : Player = m.getPlayer();
+			//var tempX = temp.x;
+			//var tempY = temp.y;
+			//var rot = temp.rotation;
 			
 		}
 		
@@ -105,7 +107,7 @@
 				if(!m.addPlayer(message))//returns true if its its own message or the player was already found
 				{
 					//make this shorter or multiple lines
-					cm.broadcast("!addPlayer " + m.getPlayer().x.toString() + " " + m.getPlayer().y.toString() + " " + m.getPlayer().getPlayerId().toString() + " " + shipNum); //add this player to the new client
+					cm.broadcast("!addPlayer " + m.getPlayer().x.toString() + " " + m.getPlayer().y.toString() + " " + m.getPlayer().getPlayerId().toString() + " " + shipNum + " " + m.getThisSpecate()); //add this player to the new client
 				}
 				
 			}
@@ -208,20 +210,29 @@
 		{
 				
 			var temp : Player = m.getPlayer();
-			//get the players rotation (players rotation is equal to the missiles rotation)
-			var rot = temp.rotation;
-			//get the position (position is equal to the players original position)
-			var tempX = temp.x;
-			var tempY = temp.y;
-			
+			if (temp != null) 
+			{
+				//get the players rotation (players rotation is equal to the missiles rotation)
+				var rot = temp.rotation;
+				//get the position (position is equal to the players original position)
+				var tempX = temp.x;
+				var tempY = temp.y;
+				var specate = temp.getSpecate();
+				//trace("Player: " + userName + " is " + specate);
+			}
 			
 			//optomisation, dont need to update if not moved
 			if(changed == true)
 			{
-				cm.broadcast("!up " + tempX + " " + tempY + " " + rot + " " + userName);
+				cm.broadcast("!up " + tempX + " " + tempY + " " + rot + " " + userName + " " + specate);
 				changed = false;
 			}
-	
+		}
+		
+		public function setPosition(tmpX:int, tmpY:int):void
+		{
+			this.x = tmpX;
+			this.y = tmpY;
 		}
 
 		public function event(e : KeyboardEvent) : void
@@ -271,7 +282,7 @@
 			chatarea.selectable = false;
 			
 			var chatFormat:TextFormat = new TextFormat();
-			chatFormat.size = 12;
+			chatFormat.size = 14;
 			//var chatFont:Font = new Font();
 			//chatFormat.font = chatFont;
 			chatFormat.color = 0xffff00;
@@ -344,14 +355,19 @@
 			cm.broadcast("!m " + mes);
 		}
 		
+		public function getSpecate():Boolean
+		{
+			return m.getThisSpecate();
+		}
+		
 		public static function battlearena(type:Boolean):void {
 			if (type == true) {
-			frame = "lightness";
+				frame = "lightness";
 			}
 			else if (type == false) {
-			frame = "darkness";
+				frame = "darkness";
+			}
 		}
-	}
 	
 }
 }

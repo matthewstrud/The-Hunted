@@ -44,6 +44,7 @@
 		 */
 		public function addPlayer(m : String) : Boolean
 		{	
+			trace("Add player message: " + m);
 			//!addPlayer xPos yPos playerName
 			var split:Array = m.split(" ");
 			if(split.length > 0)
@@ -52,12 +53,17 @@
 				{
 					var found = false;
 					
+					//if (thisPlayer != null) {
+					//	found = thisPlayer.getPlayerId == split[3] ? true:false;
+					//	trace("Player is this player (" + thisPlayer.getPlayerId() + ")" + found);
+					//}
 					//check if the player exists allready
 					for(var i = 0; i < players.length; i++)
 					{
 						if(split[3] == players[i].getPlayerId())
 						{
 							found = true;
+							trace("Player is this player (" + players[i].getPlayerId() + ")" + found);
 						}
 					}
 					
@@ -70,17 +76,33 @@
 						tmpPlayer.setPosition(tmpX,tmpY); //0 rotation
 						tmpPlayer.gotoAndStop(shipNum);
 						trace("ship num is " + shipNum);
-						players.push(tmpPlayer);
+						
 						//players.push(new Player(split[3],tmpX,tmpY,0));
-						p.addChild(tmpPlayer);
+						if (split[5] == "false" || tmpPlayer.getPlayerId() == playerName) 
+						{
+							players.push(tmpPlayer);
+							p.addChild(tmpPlayer);
+						}
+						trace("new player id is: " + tmpPlayer.getPlayerId() + " Current Id is: " + playerName);
 						if(tmpPlayer.getPlayerId() == playerName)
 						{
 							trace("adding this player");
 							thisPlayer = tmpPlayer;
 							thisPlayer.setCurrent();
+							var tspecate:Boolean = true;
+							if (split[5] == "false") tspecate = false;
+							trace("Split is equal to " + tspecate);
+							thisPlayer.setSpecate(tspecate);
 							playerSet = true;
 							found = true;
-							trace("added this player");
+							//trace("added this player");
+							//trace("BEFORE: Parent X: " + p.x + " " + " Y: " + p.y + " ");
+							//trace("Parent X: " + p.x + tmpX - 540 + " " + p.y + tmpY - 360);
+							p.thehealth.x = tmpX-540;
+							p.thehealth.y = tmpY-360; 
+							p.setPosition(-tmpX+540, -tmpY+360);
+							trace("AFTER: Parent X: " + p.x + " " + " Y: " + p.y + " ");
+							//p.addChild(tmpPlayer);
 						}
 						p.appendToChatArea("User Joined " + split[3]);
 					}
@@ -101,12 +123,15 @@
 			if(split.length > 0)
 			{
 				//Loop through the player the model knows about
+				if (split[1] != playerName)
+				{
 				for(var i:int = 0; i < players.length; i++)
 				{
 					//If the player currently selected is the same as the player
 					//being removed. Remove that player.
 					if(players[i].getPlayerId() == split[1])
 					{
+						if(split[0] != "!di")
 						p.appendToChatArea("User Left " + split[1]);
 						var tmp:Player = players[i];
 						//projectiles.indexOf(miss)
@@ -117,6 +142,7 @@
 						players.splice(i, 1);
 						removed = true;
 					}
+				}
 				}
 			}
 			return removed;
@@ -134,7 +160,12 @@
 					{
 						//If the player currently selected is the same as the player
 						//being updated. Send new values
-						if(players[i].getPlayerId() == split[4] && split[4] != playerName)
+						if (split[5] == true)
+						{
+							trace("This player is specating: " + players[i].getPlayerId());
+							players.splice(i, 1);
+						}
+						else if(players[i].getPlayerId() == split[4] && split[4] != playerName)
 						{
 							players[i].setPosition(int(split[1]), int(split[2]));
 							players[i].rotation = parseInt(split[3]);
@@ -231,9 +262,9 @@
 					thisPlayer.setSpecate(true);
 					p.sendNotificatoon(" " +thisPlayer.getPlayerId() + " was destoryed by " + split[6]);
 					p.broadcast("!di " + this.thisPlayer.getPlayerId());
-					gameover = new endScreen();
-					gameover.visible = true;
-					p.addChild(gameover);
+					//gameover = new endScreen();
+					//gameover.visible = true;
+					//p.addChild(gameover);
 				}
 				Health.changehealth(thisPlayer.getHealth());
 			}
@@ -262,6 +293,13 @@
 		public function laserSound():void 
 		{
 			channel = laser.play(0,1);
+		}
+		
+		public function getThisSpecate():Boolean
+		{
+			if(this.thisPlayer != null)
+			return this.thisPlayer.getSpecate();
+			return false;
 		}
 		
 		// This is flawed.

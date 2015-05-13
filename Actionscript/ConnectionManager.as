@@ -79,7 +79,11 @@
 		
 		private function onRoomJoin(e:SFSEvent) : void
 		{
-			broadcast("!addPlayer 540 360 " + userName + " " + p.getShipNum());
+			var tmpX:Number = Math.random() * 4320; //540
+			var tmpY:Number = Math.random() * 2880; //360
+			//var tmpX:Number = 640;
+			//var tmpY:Number = 460;
+			broadcast("!addPlayer "+tmpX+" "+tmpY+" "+ userName + " " + p.getShipNum() + " " + "false");
 			trace("joined room: " + e.params.room.name);
 		}
 		

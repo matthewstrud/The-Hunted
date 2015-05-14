@@ -17,6 +17,7 @@ package {
 		private var keysArray:Array = [];
 		private var canFire:Boolean = true;
 		
+		private var movement:Boolean = true;
 		private var isChatMode:Boolean;
 		
 		public function gameController(m:multiplayerManager) 
@@ -24,7 +25,7 @@ package {
 			this.manager = m;
 			
 			//Timer for missiles
-			var fireTimer:Timer = new Timer(500);
+			var fireTimer:Timer = new Timer(1250);
 			fireTimer.addEventListener(TimerEvent.TIMER, fireTimerListener);
 			fireTimer.start();
 			isChatMode = false;
@@ -44,30 +45,30 @@ package {
 			*/
 			if(keysArray[Keyboard.LEFT])
 			{
-				if(!isChatMode)
+				if(!isChatMode && movement)
 				manager.move(1);
 			}
 			else if(keysArray[Keyboard.RIGHT])
 			{
-				if(!isChatMode)
+				if(!isChatMode && movement)
 				manager.move(3);
 			}
 			
 			if(keysArray[Keyboard.DOWN])
 			{
-				if(!isChatMode)
+				if(!isChatMode && movement)
 				manager.move(2);
 			}
 			else if(keysArray[Keyboard.UP])
 			{
-				if(!isChatMode)
+				if(!isChatMode && movement)
 				manager.move(4);
 			}
 			
 			if(keysArray[Keyboard.SPACE])
 			{
 				//ever half second
-				if(canFire == true && !isChatMode)
+				if(canFire == true && !isChatMode && movement)
 				{
 					canFire = false;
 					manager.fire();
@@ -77,7 +78,7 @@ package {
 			if (keysArray[Keyboard.ENTER])
 			{
 				//Send text in chat room.
-				if (isChatMode)
+				if (isChatMode && movement)
 				{
 					manager.sendMessage();
 					manager.setChatBox("");
@@ -95,6 +96,11 @@ package {
 				isChatMode = true;
 				manager.setChatType(1);
 			}
+		}
+		
+		public function setMovement(val:Boolean):void
+		{
+			this.movement = val;
 		}
 		
 

@@ -19,6 +19,7 @@
 		
 		private var specate:Boolean;
 		private var health:int;
+		private var kills:int = 0;
 
 		public function Player(name : String)
 		{
@@ -267,6 +268,23 @@
 			this.health += value;
 			if (this.health > 0) return false;
 			return true;
+		}
+		
+		public function incrementKills():void
+		{
+			this.kills++;
+		}
+		
+		public function getKills():int
+		{
+			return this.kills;
+		}
+		
+		public function stopPlayer():void
+		{
+			trace("Stoppping the player");
+			this.xSpeed = 0;
+			this.ySpeed = 0;
 		}
 	
 	}

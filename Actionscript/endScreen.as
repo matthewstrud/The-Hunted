@@ -7,16 +7,31 @@
 	
 	public class endScreen extends MovieClip {
 		
-		public function endScreen() {
+		private var p;
+		
+		public function endScreen(par : multiplayerManager) {
+			this.p = par;
+			if (p.gameOver())
+			{
+				this.str_mes.text = "You won, you had this many kills: " + p.getNumOfKills();
+				removeChild(this.Spectate);
+			}
+			else
+			{
+				this.str_mes.text = "You lost, you had this many kills: " + p.getNumOfKills();
+				this.Spectate.addEventListener(MouseEvent.CLICK, spectate);
+			}
 			this.Exit.addEventListener(MouseEvent.CLICK,exit);
-			this.Spectate.addEventListener(MouseEvent.CLICK,spectate);
+			
 		}
 			private function exit(event:MouseEvent):void {
 					fscommand("quit");
 			}
 			
 			private function spectate(event:MouseEvent):void {
-				this.parent.removeChild(this); 
+				p.setMovement(true);
+				p.removeChild(this);
+				//this.parent.removeChild(this); 
 			}
 	}	
 }

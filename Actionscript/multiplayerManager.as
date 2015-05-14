@@ -261,6 +261,24 @@
 			// the last value "-1" is temperory and denotes damage.
 		}
 		
+		public function gameOver():Boolean
+		{
+			if (m.getGameStarted() && m.numOfPlayersLeft() <= 1)
+				return true;
+			return false;
+		}
+		
+		public function getNumOfKills():int
+		{
+			return this.m.getPlayer().getKills();
+		}
+		
+		public function setMovement(val:Boolean ):void
+		{
+			gc.setMovement(val);
+			if (val == false) m.getPlayer().stopPlayer();
+		}
+		
 		public function getShipNum() : String
 		{
 			return shipNum.toString();

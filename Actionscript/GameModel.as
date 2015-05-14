@@ -95,7 +95,11 @@
 							thisPlayer.setSpecate(tspecate);
 							playerSet = true;
 							found = true;
-							if (this.players.length > 1) this.gameStarted = true;
+							trace("addPlayer, number in array: " + players.length);
+							if (this.players.length > 1) 
+							{
+								this.gameStarted = true;
+							}
 							p.thehealth.x = tmpX-540;
 							p.thehealth.y = tmpY-360; 
 							p.setPosition(-tmpX+540, -tmpY+360);
@@ -144,7 +148,7 @@
 							//trace("Player id's " + ", " + tmp.getPlayerId() + ", " + split[1]);
 							//trace(players.indexOf(tmp));
 							//players.splice(players.indexOf(tmp), 1);
-							//if(p.contains(players[i]))
+							if(p.contains(players[i]))
 							p.removeChild(players[i]);
 							players.splice(i, 1);
 							removed = true;

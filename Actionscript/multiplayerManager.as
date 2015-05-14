@@ -263,7 +263,8 @@
 		
 		public function gameOver():Boolean
 		{
-			if (m.getGameStarted() && m.numOfPlayersLeft() <= 1)
+			trace("Number of players left: " + m.numOfPlayersLeft());
+			if (m.getGameStarted())
 				return true;
 			return false;
 		}

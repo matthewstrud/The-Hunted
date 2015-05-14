@@ -8,7 +8,7 @@
 <SmartFoxConfig>
 
 	<!-- Mandatory Settings -->
-	<ip>10.1.52.8</ip>
+	<ip>localhost</ip>
 	<port>9933</port>
 	<zone>BasicExamples</zone>
 	<!-- End Mandatory Settings -->

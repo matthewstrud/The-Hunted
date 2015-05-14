@@ -11,7 +11,9 @@
 		
 		public function endScreen(par : multiplayerManager) {
 			this.p = par;
-			if (p.gameOver())
+			var val:Boolean = par.gameOver();
+			trace("END SCREEN: " + val);
+			if (val)
 			{
 				this.str_mes.text = "You won, you had this many kills: " + p.getNumOfKills();
 				removeChild(this.Spectate);

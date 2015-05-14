@@ -261,14 +261,6 @@
 			// the last value "-1" is temperory and denotes damage.
 		}
 		
-		public function gameOver():Boolean
-		{
-			trace("Number of players left: " + m.numOfPlayersLeft());
-			if (m.getGameStarted())
-				return true;
-			return false;
-		}
-		
 		public function getNumOfKills():int
 		{
 			return this.m.getPlayer().getKills();

@@ -66,7 +66,10 @@
 							trace("Player is this player (" + players[i].getPlayerId() + ")" + found);
 						}
 					}
-					
+					if (this.players.length > 1) 
+					{
+						this.gameStarted = true;
+					}
 					if(found == false)
 					{
 						var tmpX:int = parseInt(split[1]);
@@ -96,10 +99,6 @@
 							playerSet = true;
 							found = true;
 							trace("addPlayer, number in array: " + players.length);
-							if (this.players.length > 1) 
-							{
-								this.gameStarted = true;
-							}
 							p.thehealth.x = tmpX-540;
 							p.thehealth.y = tmpY-360; 
 							p.setPosition(-tmpX+540, -tmpY+360);
@@ -154,6 +153,14 @@
 							removed = true;
 						}
 					}
+				}
+				trace("The game started status " + gameStarted);
+				if (players.length <= 1)
+				{
+					//thisPlayer.setSpecate(true);
+					
+					gameIsOver(true);
+					gameStarted = false;
 				}
 			}
 			return removed;
@@ -211,8 +218,6 @@
 				
 				
 				laserSound();
-				
-				//TODO check if the missile is from the player, if so give ignore value
 			}
 		}
 		
@@ -270,15 +275,9 @@
 			{
 				if (this.thisPlayer.changeHealth(parseInt(split[5])))
 				{
-					thisPlayer.setSpecate(true);
 					p.sendNotificatoon(" " +thisPlayer.getPlayerId() + " was destoryed by " + split[6]);
 					p.broadcast("!di " + this.thisPlayer.getPlayerId() + " " + split[6]);
-					gameover = new endScreen(p);
-					gameover.x = -p.x;
-					gameover.y = -p.y;
-					gameover.visible = true;
-					p.addChild(gameover);
-					p.setMovement(false);
+					gameIsOver(false);
 				}
 				if(!thisPlayer.getSpecate())
 					Health.changehealth(thisPlayer.getHealth());
@@ -339,6 +338,16 @@
 			return this.gameStarted;
 		}
 		
+		private function gameIsOver(val:Boolean):void
+		{
+			thisPlayer.setSpecate(true);
+			gameover = new endScreen(p, val);
+			gameover.x = -p.x;
+			gameover.y = -p.y;
+			gameover.visible = true;
+			p.addChild(gameover);
+			p.setMovement(false);	
+		}
 	}
 	
 }

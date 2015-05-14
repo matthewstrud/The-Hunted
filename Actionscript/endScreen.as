@@ -9,9 +9,8 @@
 		
 		private var p;
 		
-		public function endScreen(par : multiplayerManager) {
+		public function endScreen(par : multiplayerManager, val:Boolean) {
 			this.p = par;
-			var val:Boolean = par.gameOver();
 			trace("END SCREEN: " + val);
 			if (val)
 			{

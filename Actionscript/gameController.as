@@ -25,7 +25,7 @@ package {
 			this.manager = m;
 			
 			//Timer for missiles
-			var fireTimer:Timer = new Timer(50);
+			var fireTimer:Timer = new Timer(1250);
 			fireTimer.addEventListener(TimerEvent.TIMER, fireTimerListener);
 			fireTimer.start();
 			isChatMode = false;

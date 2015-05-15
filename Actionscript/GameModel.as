@@ -393,7 +393,7 @@
 					return players[i];
 				}
 			}
-			return null;
+			return thisPlayer;
 		}
 	}
 	

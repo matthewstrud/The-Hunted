@@ -22,7 +22,7 @@
 		private var roomName : String = "room";
 		private var changed : Boolean = true;
 		private var shipNum : int = 0;
-		private var lasNum : int = 0;
+		private var lasNum : int = 0; //Laser number
 		public static var frame :String = "darkness";
 		
 		//private var healthField:TextField;
@@ -107,6 +107,7 @@
 				if(!m.addPlayer(message))//returns true if its its own message or the player was already found
 				{
 					//make this shorter or multiple lines
+					if(!m.getPlayer().getSpecate())
 					cm.broadcast("!addPlayer " + m.getPlayer().x.toString() + " " + m.getPlayer().y.toString() + " " + m.getPlayer().getPlayerId().toString() + " " + shipNum + " " + m.getThisSpecate()); //add this player to the new client
 				}
 				
@@ -139,6 +140,10 @@
 			{
 				m.removePlayer(message);
 			}
+			if (message.indexOf("!b") >= 0)
+			{
+				m.createBomb(message);
+			}
 		}
 		
 		/*
@@ -147,7 +152,6 @@
 		public function move(move : int) : void 
 		{
 				
-			trace("entered move");
 			var temp : Player = m.getPlayer();
 			var tempX = temp.x;
 			var tempY = temp.y;
@@ -205,6 +209,17 @@
 			}
 		}
 		
+		public function bomb():void
+		{
+			if (!m.getPlayer().getSpecate())
+			{
+				var temp:Player = m.getPlayer();
+				var xPos = temp.x;
+				var yPos = temp.y;
+				cm.broadcast("!b " + xPos + " " + yPos + " " + userName + " " + lasNum);
+			}
+		}
+		
 		//send position updates to the other players
 		public function updateTimerListener(e:TimerEvent) : void
 		{
@@ -257,8 +272,13 @@
 		
 		public function destroy(miss : Missile)
 		{
-			cm.broadcast("!des " + userName + " " + m.getMissileIndex + " " + "-1" + " " + miss.getPlayerName()); 
+			cm.broadcast("!des " + userName + " " + m.getMissileIndex + " " + "-1" + " " + miss.getPlayerName());
 			// the last value "-1" is temperory and denotes damage.
+		}
+		
+		public function destroyb(bomb : Bomb):void
+		{
+			cm.broadcast("!des " + userName + " " + m.getBombIndex + " " + "-1" + " " + bomb.getPlayerName());
 		}
 		
 		public function getNumOfKills():int

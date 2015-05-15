@@ -233,6 +233,32 @@
 			}
 		}
 		
+		public function createBomb(mes:String):void
+		{
+			trace(mes);
+			
+			var split:Array = mes.split(" ");
+			
+			if(split[0] == "!b")
+			{
+				//create a new missle
+				var tmpX:int = parseInt(split[1]);
+				var tmpY:int = parseInt(split[2]);
+				var user:String = split[3];
+				var lasNum:int = parseInt(split[4]);
+				
+				var playr : Player = getPlayerArr(split[3]);
+				
+				var tmpBomb : Bomb = new Bomb(tmpX, tmpY, players,playr, thisPlayer);
+				tmpBomb.gotoAndStop(lasNum);
+				
+				projectiles.push(tmpBomb);
+				p.addChild(tmpBomb);
+				
+				laserSound();
+			}
+		}
+		
 		public function getPlayer() : Player
 		{
 			return thisPlayer;
@@ -322,6 +348,11 @@
 			return projectiles.indexOf(miss);
 		}
 		
+		public function getBombIndex(bomb:Bomb) : int
+		{
+			return projectiles.indexOf(bomb);
+		}
+		
 		public function removeMissileIndex(integer : int) : void
 		{
 			p.removeChild(projectiles[integer]);
@@ -347,6 +378,18 @@
 			gameover.visible = true;
 			p.addChild(gameover);
 			p.setMovement(false);	
+		}
+		
+		private function getPlayerArr(p : String) : Player
+		{
+			for(var i:int = 0; i < players.length; i++)
+			{
+				if(players[i].getPlayerId() == p)
+				{
+					return players[i];
+				}
+			}
+			return thisPlayer;
 		}
 	}
 	

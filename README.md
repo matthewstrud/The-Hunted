@@ -1,2 +1,2 @@
 # The-Hunted
-Survival game created using a Java Server and with a AS3 client.
+Asteroids like game created using SmartFox Server 2X and Flash (AS3).

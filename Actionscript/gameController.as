@@ -16,6 +16,7 @@ package {
 		private var manager:multiplayerManager;
 		private var keysArray:Array = [];
 		private var canFire:Boolean = true;
+		private var canBomb:int = 5;
 		
 		private var movement:Boolean = true;
 		private var isChatMode:Boolean;
@@ -73,6 +74,14 @@ package {
 					canFire = false;
 					manager.fire();
 					keysArray[Keyboard.SPACE] = false;
+				}
+			}
+			if (keysArray[Keyboard.CONTROL)
+			{
+				if (canBomb > 0)
+				{
+					canBomb--;
+					manager.bomb();
 				}
 			}
 			if (keysArray[Keyboard.ENTER])

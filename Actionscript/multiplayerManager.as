@@ -22,7 +22,7 @@
 		private var roomName : String = "room";
 		private var changed : Boolean = true;
 		private var shipNum : int = 0;
-		private var lasNum : int = 0;
+		private var lasNum : int = 0; //Laser number
 		public static var frame :String = "darkness";
 		
 		//private var healthField:TextField;
@@ -139,6 +139,14 @@
 			{
 				m.removePlayer(message);
 			}
+			if (message.indexOf("!b") >= 0)
+			{
+				m.createBomb(message);
+			}
+			if (message.indexOf("ov") >= 0)
+			{
+				
+			}
 		}
 		
 		/*
@@ -202,6 +210,17 @@
 				trace(rot);
 				
 				cm.broadcast("!f " + xPos + " " + yPos + " " + rot + " " + userName + " " + lasNum);
+			}
+		}
+		
+		public function bomb():void
+		{
+			if (!m.getPlayer().getSpecate())
+			{
+				var temp:Player = m.getPlayer();
+				var xPos = temp.x;
+				var yPos = temp.y;
+				cm.broadcast("!b " + xPos + " " + yPos + " " + " " + userName + " " + lasNum);
 			}
 		}
 		

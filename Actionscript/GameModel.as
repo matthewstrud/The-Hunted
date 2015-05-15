@@ -161,6 +161,7 @@
 					
 					gameIsOver(true);
 					gameStarted = false;
+					p.broadcast("ov");
 				}
 			}
 			return removed;
@@ -231,6 +232,16 @@
 					projectiles[i].update();
 				}
 			}
+		}
+		
+		public function createBomb(mes:String):void
+		{
+			
+		}
+		
+		private function updateBombs():void
+		{
+			
 		}
 		
 		public function getPlayer() : Player
@@ -336,6 +347,11 @@
 		public function getGameStarted():Boolean
 		{
 			return this.gameStarted;
+		}
+		
+		public function appendOverScreen():void
+		{
+			if(this.p.contains(endScreen)
 		}
 		
 		private function gameIsOver(val:Boolean):void

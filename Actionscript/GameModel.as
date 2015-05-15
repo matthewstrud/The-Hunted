@@ -255,6 +255,7 @@
 				p.addChild(tmpBomb);
 				
 				laserSound();
+			}
 		}
 		
 		public function getPlayer() : Player

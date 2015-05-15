@@ -236,12 +236,25 @@
 		
 		public function createBomb(mes:String):void
 		{
+			trace(mes);
 			
-		}
-		
-		private function updateBombs():void
-		{
+			var split:Array = mes.split(" ");
 			
+			if(split[0] == "!b")
+			{
+				//create a new missle
+				var tmpX:int = parseInt(split[1]);
+				var tmpY:int = parseInt(split[2]);
+				var user:String = split[3];
+				var lasNum:int = parseInt(split[4]);
+				
+				var tmpBomb : Bomb = new Bomb(tmpX, tmpY, tmpR, thisPlayer,user);
+				tmpBomb.gotoAndStop(lasNum);
+				
+				projectiles.push(tmpBomb);
+				p.addChild(tmpBomb);
+				
+				laserSound();
 		}
 		
 		public function getPlayer() : Player

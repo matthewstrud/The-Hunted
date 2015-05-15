@@ -76,7 +76,7 @@ package {
 					keysArray[Keyboard.SPACE] = false;
 				}
 			}
-			if (keysArray[Keyboard.CONTROL)
+			if (keysArray[Keyboard.CONTROL])
 			{
 				if (canBomb > 0)
 				{

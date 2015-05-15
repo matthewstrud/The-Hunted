@@ -161,7 +161,6 @@
 					
 					gameIsOver(true);
 					gameStarted = false;
-					p.broadcast("ov");
 				}
 			}
 			return removed;
@@ -250,7 +249,7 @@
 				
 				var playr : Player = getPlayerArr(split[3]);
 				
-				var tmpBomb : Bomb = new Bomb(tmpX, tmpY, players,playr, user, thisPlayer);
+				var tmpBomb : Bomb = new Bomb(tmpX, tmpY, players,playr, thisPlayer);
 				tmpBomb.gotoAndStop(lasNum);
 				
 				projectiles.push(tmpBomb);
@@ -363,14 +362,6 @@
 		public function getGameStarted():Boolean
 		{
 			return this.gameStarted;
-		}
-		
-		public function appendOverScreen():void
-		{
-			if (!this.p.contains(endScreen))
-			{
-				p.addChild(endScreen);
-			}
 		}
 		
 		private function gameIsOver(val:Boolean):void

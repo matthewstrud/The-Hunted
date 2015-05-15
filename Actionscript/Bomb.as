@@ -12,7 +12,7 @@
 		private var hasHit : Boolean = false;
 		private var p = null;
 		
-		public function Bomb(tmpX : int, tmpY : int, p : Array, plyr : Player, user : String, thisPlayer)
+		public function Bomb(tmpX : int, tmpY : int, p : Array, plyr : Player, thisPlayer:Player)
 		{
 			addEventListener(Event.ADDED_TO_STAGE, addedHandler);
 			x = tmpX;
@@ -21,7 +21,7 @@
 			owner = plyr;
 		
 			
-			if(user == owner.getPlayerId())
+			if(thisPlayer.getPlayerId() == owner.getPlayerId())
 			{
 				setImmune();
 			}
@@ -102,7 +102,7 @@
 				if(this.hitTestObject(player) && !hasHit)
 				{
 					hasHit = true;
-					p.destroy(this);
+					p.destroyb(this);
 				}
 			}
 		}

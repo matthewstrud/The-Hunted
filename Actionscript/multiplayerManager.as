@@ -144,10 +144,6 @@
 			{
 				m.createBomb(message);
 			}
-			if (message.indexOf("ov") >= 0)
-			{
-				m.appendOverScreen();
-			}
 		}
 		
 		/*
@@ -220,7 +216,7 @@
 				var temp:Player = m.getPlayer();
 				var xPos = temp.x;
 				var yPos = temp.y;
-				cm.broadcast("!b " + xPos + " " + yPos + " " + " " + userName + " " + lasNum);
+				cm.broadcast("!b " + xPos + " " + yPos + " " + userName + " " + lasNum);
 			}
 		}
 		
@@ -280,7 +276,7 @@
 			// the last value "-1" is temperory and denotes damage.
 		}
 		
-		public function destory(bomb : Bomb)
+		public function destoryb(bomb : Bomb)
 		{
 			cm.broadcast("!des " + userName + " " + m.getMissileIndex + " " + "-1" + " " + bomb.getPlayerName());
 		}

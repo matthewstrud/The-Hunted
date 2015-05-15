@@ -353,7 +353,8 @@
 		
 		public function sendMessage():void
 		{
-			cm.broadcast("!m " + m.getName() + " " + this.chatbox.text);
+			if(this.chatbox.text != "")
+				cm.broadcast("!m " + m.getName() + " " + this.chatbox.text);
 		}
 		
 		public function broadcast(mes:String):void

@@ -351,7 +351,10 @@
 		
 		public function appendOverScreen():void
 		{
-			if(this.p.contains(endScreen)
+			if (!this.p.contains(endScreen))
+			{
+				p.addChild(endScreen);
+			}
 		}
 		
 		private function gameIsOver(val:Boolean):void

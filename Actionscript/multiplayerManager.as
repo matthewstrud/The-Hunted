@@ -156,7 +156,6 @@
 		public function move(move : int) : void 
 		{
 				
-			trace("entered move");
 			var temp : Player = m.getPlayer();
 			var tempX = temp.x;
 			var tempY = temp.y;

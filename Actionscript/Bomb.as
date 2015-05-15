@@ -7,12 +7,12 @@
 		private var owner : Player = null;
 		private var isset : Boolean = false;
 		private var immune : Boolean = false;
-		private var speed : int = 10;
+		private var speed : int = 5;
 		private var radius : int = 100;
 		private var hasHit : Boolean = false;
 		private var p = null;
 		
-		public function Bomb(tmpX : int, tmpY : int, p : Array, plyr : Player, user : String)
+		public function Bomb(tmpX : int, tmpY : int, p : Array, plyr : Player, user : String, thisPlayer)
 		{
 			addEventListener(Event.ADDED_TO_STAGE, addedHandler);
 			x = tmpX;
@@ -32,7 +32,7 @@
 			//if no player is found
 			if(!isset)
 			{
-				
+				searchForPlayer();
 			}
 			else //the player is set
 			{
@@ -71,6 +71,7 @@
 		
 		public function addPlayer(p : Player)
 		{
+			trace("player found");
 			player = p;
 			isset = true;
 		}
@@ -80,6 +81,7 @@
 		*/
 		private function searchForPlayer()
 		{
+			trace("checking players");
 			for(var i : int = 0; i < playerArray.length; i++)
 			{
 				//check if this player is within a certain radius
@@ -87,6 +89,7 @@
 					&& playerArray[i].y - this.y < radius && playerArray[i].y - this.y > - radius
 				&& playerArray[i] != owner)
 				{
+					trace("player found, calling add player");
 					addPlayer(playerArray[i]);
 				}
 			}

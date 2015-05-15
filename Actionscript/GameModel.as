@@ -248,7 +248,9 @@
 				var user:String = split[3];
 				var lasNum:int = parseInt(split[4]);
 				
-				var tmpBomb : Bomb = new Bomb(tmpX, tmpY, players,thisPlayer,user);
+				playr : Player = getPlayerArr(aplit[3]);
+				
+				var tmpBomb : Bomb = new Bomb(tmpX, tmpY, players,playr, user, thisPlayer);
 				tmpBomb.gotoAndStop(lasNum);
 				
 				projectiles.push(tmpBomb);
@@ -380,6 +382,17 @@
 			gameover.visible = true;
 			p.addChild(gameover);
 			p.setMovement(false);	
+		}
+		
+		private function getPlayerArr(p : String) : Player
+		{
+			for(var i:int = 0; i < players.length; i++)
+			{
+				if(players[i].getPlayerId() == p)
+				{
+					return players[i];
+				}
+			}
 		}
 	}
 	

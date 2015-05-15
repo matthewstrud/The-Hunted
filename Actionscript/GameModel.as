@@ -348,6 +348,11 @@
 			return projectiles.indexOf(miss);
 		}
 		
+		public function getBombIndex(bomb:Bomb) : int
+		{
+			return projectiles.indexOf(bomb);
+		}
+		
 		public function removeMissileIndex(integer : int) : void
 		{
 			p.removeChild(projectiles[integer]);

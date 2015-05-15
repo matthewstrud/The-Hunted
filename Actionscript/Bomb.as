@@ -8,7 +8,7 @@
 		private var isset : Boolean = false;
 		private var immune : Boolean = false;
 		private var speed : int = 5;
-		private var radius : int = 100;
+		private var radius : int = 500;
 		private var hasHit : Boolean = false;
 		private var p = null;
 		
@@ -20,7 +20,6 @@
 			playerArray = p;
 			owner = plyr;
 		
-			
 			if(thisPlayer.getPlayerId() == owner.getPlayerId())
 			{
 				setImmune();
@@ -81,7 +80,7 @@
 		*/
 		private function searchForPlayer()
 		{
-			trace("checking players");
+			//trace("checking players");
 			for(var i : int = 0; i < playerArray.length; i++)
 			{
 				//check if this player is within a certain radius
@@ -89,7 +88,7 @@
 					&& playerArray[i].y - this.y < radius && playerArray[i].y - this.y > - radius
 				&& playerArray[i] != owner)
 				{
-					trace("player found, calling add player");
+					//trace("player found, calling add player");
 					addPlayer(playerArray[i]);
 				}
 			}

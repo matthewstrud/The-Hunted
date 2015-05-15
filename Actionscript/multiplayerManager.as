@@ -276,9 +276,9 @@
 			// the last value "-1" is temperory and denotes damage.
 		}
 		
-		public function destoryb(bomb : Bomb)
+		public function destroyb(bomb : Bomb):void
 		{
-			cm.broadcast("!des " + userName + " " + m.getMissileIndex + " " + "-1" + " " + bomb.getPlayerName());
+			cm.broadcast("!des " + userName + " " + m.getBombIndex + " " + "-1" + " " + bomb.getPlayerName());
 		}
 		
 		public function getNumOfKills():int

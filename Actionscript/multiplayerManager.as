@@ -107,6 +107,7 @@
 				if(!m.addPlayer(message))//returns true if its its own message or the player was already found
 				{
 					//make this shorter or multiple lines
+					if(!m.getPlayer().getSpecate())
 					cm.broadcast("!addPlayer " + m.getPlayer().x.toString() + " " + m.getPlayer().y.toString() + " " + m.getPlayer().getPlayerId().toString() + " " + shipNum + " " + m.getThisSpecate()); //add this player to the new client
 				}
 				

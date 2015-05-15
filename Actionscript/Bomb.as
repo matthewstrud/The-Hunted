@@ -1,17 +1,20 @@
 ﻿package  {
-	
+	import flash.events.Event;
 	public class Bomb extends Entity{
 
-		private playerArray : Array = null;
-		private player : Player = null;
-		private owner : Player = null;
-		private isset : Boolean = false;
-		private immune : Boolean = false;
-		private speed : int = 10;
-		private radius : int = 100;
+		private var playerArray : Array;
+		private var player : Player = null;
+		private var owner : Player = null;
+		private var isset : Boolean = false;
+		private var immune : Boolean = false;
+		private var speed : int = 10;
+		private var radius : int = 100;
+		private var hasHit : Boolean = false;
+		private var p = null;
 		
 		public function Bomb(tmpX : int, tmpY : int, p : Array, plyr : Player, user : String)
 		{
+			addEventListener(Event.ADDED_TO_STAGE, addedHandler);
 			x = tmpX;
 			y = tmpY;
 			playerArray = p;
@@ -100,6 +103,17 @@
 				}
 			}
 		}
+		
+		public function getPlayerName():String
+		{
+			return owner.getPlayerId();
+		}
+		
+		public function addedHandler(e:Event)
+		{
+			p = this.parent;
+		}
+		
 
 	}
 	

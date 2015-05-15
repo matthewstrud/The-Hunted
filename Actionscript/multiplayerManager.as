@@ -276,8 +276,13 @@
 		
 		public function destroy(miss : Missile)
 		{
-			cm.broadcast("!des " + userName + " " + m.getMissileIndex + " " + "-1" + " " + miss.getPlayerName()); 
+			cm.broadcast("!des " + userName + " " + m.getMissileIndex + " " + "-1" + " " + miss.getPlayerName());
 			// the last value "-1" is temperory and denotes damage.
+		}
+		
+		public function destory(bomb : Bomb)
+		{
+			cm.broadcast("!des " + userName + " " + m.getMissileIndex + " " + "-1" + " " + bomb.getPlayerName());
 		}
 		
 		public function getNumOfKills():int

@@ -248,7 +248,7 @@
 				var user:String = split[3];
 				var lasNum:int = parseInt(split[4]);
 				
-				var tmpBomb : Bomb = new Bomb(tmpX, tmpY, tmpR, thisPlayer,user);
+				var tmpBomb : Bomb = new Bomb(tmpX, tmpY, players,thisPlayer,user);
 				tmpBomb.gotoAndStop(lasNum);
 				
 				projectiles.push(tmpBomb);

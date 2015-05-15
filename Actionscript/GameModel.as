@@ -248,7 +248,7 @@
 				var user:String = split[3];
 				var lasNum:int = parseInt(split[4]);
 				
-				playr : Player = getPlayerArr(aplit[3]);
+				var playr : Player = getPlayerArr(split[3]);
 				
 				var tmpBomb : Bomb = new Bomb(tmpX, tmpY, players,playr, user, thisPlayer);
 				tmpBomb.gotoAndStop(lasNum);
@@ -393,6 +393,7 @@
 					return players[i];
 				}
 			}
+			return null;
 		}
 	}
 	
